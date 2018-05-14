@@ -7,6 +7,8 @@ twitter: <%= env :twitter, 'handle' %>
 github:  <%= env :github,  'username'  %>
 email:   <%= env :email,   'email@example.com'  %>
 about:   <%= env :about,   'Example Tagline That is Longer.' %>
+aud:     <%= env :aud,     'foo' %>
+iss:     <%= env :iss,     'bar' %>
 
 # Google Analytics
 ga_id:   <%= env :ga,      ''  %>

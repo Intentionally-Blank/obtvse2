@@ -1,12 +1,10 @@
-@import "compass/css3";
-@import "color_scheme";
+@import "compass/css3.css";
+@import "../color_scheme.css.scss";
 
 ::selection, ::-moz-selection {
-  background: $selection-bg;
+  background: #fff;
   color: $selection-color;
 }
-
-* { @include box-sizing(border-box); }
 
 body {
   background: $body-bg;
@@ -51,7 +49,6 @@ a:visited
 a:active {
   color: $theme;
   text-decoration: none;
-  @include transition(all .1s linear);
 }
 
 a:hover,
@@ -91,7 +88,6 @@ aside {
   right: 1em;
   z-index: 100;
   color: #ddd;
-  @include transition(all .3s ease-in);
 
   &:hover {
     color: $theme;

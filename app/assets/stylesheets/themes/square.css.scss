@@ -1,5 +1,5 @@
-@import "../color_scheme";
-@import "compass/css3";
+@import "../color_scheme.css";
+@import "compass/css3.css";
 
 $width: 200px;
 $line-height: 1.5em;
@@ -8,6 +8,7 @@ $header-width: 200px;
 $header-pad: 40px;
 $content-pad: 60px;
 
+$theme: #fff;
 $header-name: $theme;
 $header-text: #fff;
 $header-link: $theme;
@@ -218,7 +219,6 @@ header {
       width: 8px;
       height: 8px;
       background: #ccc;
-      @include transform(rotate(45deg));
     }
   }
 }

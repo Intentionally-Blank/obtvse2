@@ -1,23 +1,17 @@
 class UsersController < ApplicationController
-  before_action :require_login_unless_no_users
 
-  def create
-    @user = User.new(params.require(:user).permit(:email, :password, :password_confirmation))
-
-    respond_to do |format|
-      if @user.save
-        auto_login @user
-        format.html { redirect_to admin_path, notice: "Welcome!" }
-      else
-        format.html { render action: "new" }
-      end
-    end
+  def index
   end
 
-private
-
-  def require_login_unless_no_users
-    require_login unless no_users?
+  def create
+    token = params[:jwt]
+    rsa_public = <<DOC
+-----BEGIN CERTIFICATE-----
+MIIC/TCCAeWgAwIBAgIJcubT+chCu4iyMA0GCSqGSIb3DQEBCwUAMBwxGjAYBgNVBAMTEWliLWJsb2cuYXV0aDAuY29tMB4XDTE4MDUxNDAwMDU0M1oXDTMyMDEyMTAwMDU0M1owHDEaMBgGA1UEAxMRaWItYmxvZy5hdXRoMC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC8PyT1dTwyY3RgUGVTPcVSkCkYVaE037Vb3SlZk0mafCc5VwtGfOyucWCjBvc44yT6QTOTP55UxdVf0PSyt4xTe5a9MDDMZh+QYUUuZw2fw/i8NJAGgzWjuJMZsV5Djq44lzFmIQyqZ8etZx25dTiwycM67BNdVbekSQ3YAoBylJvKnHqFOgXLuWrSRMDgLhTxNI7Glpl8NqRgydcN4lnVsD06KcAx1OSqtH4BHlzp/qCD0DdYaI8AN+d+dAQzw0bSRCVFJjd/wdjL09AaygEN6PT3OPn9o+AM01y69PgDTiPCHd8XEaraRNpXdPpKhLSj2ieJPmNjBmhLMj8Dq1pVAgMBAAGjQjBAMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFBGKu4wkFX0uUlcRl8iNRmOy/5zqMA4GA1UdDwEB/wQEAwIChDANBgkqhkiG9w0BAQsFAAOCAQEASO9yOoKJdSRhNFuOOhMcP2rjzYUyUledXQo7g/UljigMuwG5+EZL4qIcEpFh7JrA12Agok+fVZk84LC8iUP2P3OJtjAxINXVa6u2EdpC5zJ6mtU4NmNrb8jP5E7r7E+XR0XIBuZV3xNxqAkfcD4/Qig8QEvUF9UBL+LqJiUQrooHqw4UzBztM9h1AdIjO1AAg79CgKZu/md3MXdDbV4jWUSi+YyYDijyp8x/vN6d3UjXv0O+q5RaPYd1EvUQ4Gx26M9+1yvKphDF12rypzsAs5v+xj5qSSqPdAOHIV9rnPtydlg41eNGdY1dQNhDWv6pjBdfNwxXqmSnhu1YLKF74g==
+-----END CERTIFICATE-----
+DOC
+    rsa = OpenSSL::X509::Certificate.new(rsa_public)
+    decoded_token = JWT.decode token, rsa.public_key, true, algorithm: "RS256"
   end
 
 end
