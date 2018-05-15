@@ -1,10 +1,3 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 10.3 (Ubuntu 10.3-1.pgdg16.04+1)
--- Dumped by pg_dump version 10.3 (Ubuntu 10.3-1.pgdg16.04+1)
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -32,6 +25,18 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
 
 --
 -- Name: posts; Type: TABLE; Schema: public; Owner: -
@@ -147,52 +152,6 @@ ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.users (
-    id integer NOT NULL,
-    username character varying NOT NULL,
-    email character varying,
-    crypted_password character varying,
-    salt character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    remember_me_token character varying,
-    remember_me_token_expires_at timestamp without time zone,
-    reset_password_token character varying,
-    reset_password_token_expires_at timestamp without time zone,
-    reset_password_email_sent_at timestamp without time zone,
-    last_login_at timestamp without time zone,
-    last_logout_at timestamp without time zone,
-    last_activity_at timestamp without time zone,
-    failed_logins_count integer DEFAULT 0,
-    lock_expires_at timestamp without time zone,
-    last_login_from_ip_address character varying
-);
-
-
---
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.users_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
-
-
---
 -- Name: posts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -214,10 +173,11 @@ ALTER TABLE ONLY public.sessions ALTER COLUMN id SET DEFAULT nextval('public.ses
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
 
 
 --
@@ -245,14 +205,6 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
 -- Name: index_sessions_on_session_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -264,27 +216,6 @@ CREATE INDEX index_sessions_on_session_id ON public.sessions USING btree (sessio
 --
 
 CREATE INDEX index_sessions_on_updated_at ON public.sessions USING btree (updated_at);
-
-
---
--- Name: index_users_on_last_logout_at_and_last_activity_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_users_on_last_logout_at_and_last_activity_at ON public.users USING btree (last_logout_at, last_activity_at);
-
-
---
--- Name: index_users_on_remember_me_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_users_on_remember_me_token ON public.users USING btree (remember_me_token);
-
-
---
--- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
 
 
 --
@@ -308,45 +239,28 @@ ALTER TABLE ONLY public.revisions
 
 SET search_path TO "$user",public;
 
-INSERT INTO schema_migrations (version) VALUES ('20120323012656');
+INSERT INTO "schema_migrations" (version) VALUES
+('20120323012656'),
+('20120323030346'),
+('20120323043430'),
+('20120323052330'),
+('20120327204225'),
+('20120330144129'),
+('20120408085017'),
+('20120414183155'),
+('20120417093203'),
+('20120417093502'),
+('20120417094932'),
+('20120417142328'),
+('20121225192317'),
+('20121225192318'),
+('20121225192319'),
+('20121225192320'),
+('20121225192321'),
+('20121225192322'),
+('20121229190107'),
+('20130809232825'),
+('20180513220052'),
+('20180515151847');
 
-INSERT INTO schema_migrations (version) VALUES ('20120323030346');
-
-INSERT INTO schema_migrations (version) VALUES ('20120323043430');
-
-INSERT INTO schema_migrations (version) VALUES ('20120323052330');
-
-INSERT INTO schema_migrations (version) VALUES ('20120327204225');
-
-INSERT INTO schema_migrations (version) VALUES ('20120330144129');
-
-INSERT INTO schema_migrations (version) VALUES ('20120408085017');
-
-INSERT INTO schema_migrations (version) VALUES ('20120414183155');
-
-INSERT INTO schema_migrations (version) VALUES ('20120417093203');
-
-INSERT INTO schema_migrations (version) VALUES ('20120417093502');
-
-INSERT INTO schema_migrations (version) VALUES ('20120417094932');
-
-INSERT INTO schema_migrations (version) VALUES ('20120417142328');
-
-INSERT INTO schema_migrations (version) VALUES ('20121225192317');
-
-INSERT INTO schema_migrations (version) VALUES ('20121225192318');
-
-INSERT INTO schema_migrations (version) VALUES ('20121225192319');
-
-INSERT INTO schema_migrations (version) VALUES ('20121225192320');
-
-INSERT INTO schema_migrations (version) VALUES ('20121225192321');
-
-INSERT INTO schema_migrations (version) VALUES ('20121225192322');
-
-INSERT INTO schema_migrations (version) VALUES ('20121229190107');
-
-INSERT INTO schema_migrations (version) VALUES ('20130809232825');
-
-INSERT INTO schema_migrations (version) VALUES ('20180513220052');
 
