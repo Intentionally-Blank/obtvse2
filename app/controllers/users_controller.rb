@@ -1,23 +1,25 @@
 class UsersController < ApplicationController
-  before_action :require_login_unless_no_users
+  attr_accessor :valid_against
+
+  def index
+  end
 
   def create
-    @user = User.new(params.require(:user).permit(:email, :password, :password_confirmation))
-
-    respond_to do |format|
-      if @user.save
-        auto_login @user
-        format.html { redirect_to admin_path, notice: "Welcome!" }
-      else
-        format.html { render action: "new" }
-      end
+    token = TokenValidationService.new(params[:jwt], valid_against)
+    if token.valid?
+      session[:user] = token.grants[:sub]
+      flash[:notice] = "Successfully Logged In"
+      redirect_to admin_url
+    else
+      flash[:error] = "JWT not valid!"
+      render action: :index
     end
   end
 
 private
 
-  def require_login_unless_no_users
-    require_login unless no_users?
+  def valid_against
+    @valid_against ||= INFO
   end
 
 end

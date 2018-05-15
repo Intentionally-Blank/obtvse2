@@ -1,11 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
-  before_action :get_user
+  helper_method :logged_in?
   helper_method :no_users?
 
+  def logged_in?
+    !!session[:user]
+  end
+
   def no_users?
-    User.all.count == 0
+    false
   end
 
   def not_found
@@ -29,9 +32,4 @@ class ApplicationController < ActionController::Base
     render plain: "Unauthorized", status: :unauthorized
   end
 
-private
-
-  def get_user
-    @user = current_user || User.new
-  end
 end

@@ -6,9 +6,8 @@ gem "activerecord-session_store"
 gem "pg"
 gem "puma"
 
-# Auth/users
-gem "bcrypt-ruby"
-gem "sorcery"
+# Auth
+gem "jwt"
 
 # Frontend Utilities
 gem "compass-rails"
