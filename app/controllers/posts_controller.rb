@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :require_login, except: [:index, :show, :admin]
+  before_action :require_login, except: [:index, :show]
   layout "admin", except: [:index, :show]
 
   def index
@@ -34,18 +34,10 @@ class PostsController < ApplicationController
   end
 
   def admin
-    if logged_in?
-      @no_header = true
-      @post = Post.new
-      @published = Post.published.newest
-      @drafts = Post.unpublished.order("updated_at desc")
-    else
-      if no_users?
-        render "users/create"
-      else
-        render_unauthorized
-      end
-    end
+    @no_header = true
+    @post = Post.new
+    @published = Post.published.newest
+    @drafts = Post.unpublished.order("updated_at desc")
   end
 
   def new
@@ -108,7 +100,9 @@ class PostsController < ApplicationController
 
 private
 
-  def admin?
-    session[:admin] == true
+  def require_login
+    unless session[:user]
+      render_unauthorized && return
+    end
   end
 end

@@ -1,17 +1,25 @@
 class UsersController < ApplicationController
+  attr_accessor :valid_against
 
   def index
   end
 
   def create
-    token = params[:jwt]
-    rsa_public = <<DOC
------BEGIN CERTIFICATE-----
-MIIC/TCCAeWgAwIBAgIJcubT+chCu4iyMA0GCSqGSIb3DQEBCwUAMBwxGjAYBgNVBAMTEWliLWJsb2cuYXV0aDAuY29tMB4XDTE4MDUxNDAwMDU0M1oXDTMyMDEyMTAwMDU0M1owHDEaMBgGA1UEAxMRaWItYmxvZy5hdXRoMC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC8PyT1dTwyY3RgUGVTPcVSkCkYVaE037Vb3SlZk0mafCc5VwtGfOyucWCjBvc44yT6QTOTP55UxdVf0PSyt4xTe5a9MDDMZh+QYUUuZw2fw/i8NJAGgzWjuJMZsV5Djq44lzFmIQyqZ8etZx25dTiwycM67BNdVbekSQ3YAoBylJvKnHqFOgXLuWrSRMDgLhTxNI7Glpl8NqRgydcN4lnVsD06KcAx1OSqtH4BHlzp/qCD0DdYaI8AN+d+dAQzw0bSRCVFJjd/wdjL09AaygEN6PT3OPn9o+AM01y69PgDTiPCHd8XEaraRNpXdPpKhLSj2ieJPmNjBmhLMj8Dq1pVAgMBAAGjQjBAMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFBGKu4wkFX0uUlcRl8iNRmOy/5zqMA4GA1UdDwEB/wQEAwIChDANBgkqhkiG9w0BAQsFAAOCAQEASO9yOoKJdSRhNFuOOhMcP2rjzYUyUledXQo7g/UljigMuwG5+EZL4qIcEpFh7JrA12Agok+fVZk84LC8iUP2P3OJtjAxINXVa6u2EdpC5zJ6mtU4NmNrb8jP5E7r7E+XR0XIBuZV3xNxqAkfcD4/Qig8QEvUF9UBL+LqJiUQrooHqw4UzBztM9h1AdIjO1AAg79CgKZu/md3MXdDbV4jWUSi+YyYDijyp8x/vN6d3UjXv0O+q5RaPYd1EvUQ4Gx26M9+1yvKphDF12rypzsAs5v+xj5qSSqPdAOHIV9rnPtydlg41eNGdY1dQNhDWv6pjBdfNwxXqmSnhu1YLKF74g==
------END CERTIFICATE-----
-DOC
-    rsa = OpenSSL::X509::Certificate.new(rsa_public)
-    decoded_token = JWT.decode token, rsa.public_key, true, algorithm: "RS256"
+    token = TokenValidationService.new(params[:jwt], valid_against)
+    if token.valid?
+      session[:user] = token.grants[:sub]
+      flash[:notice] = "Successfully Logged In"
+      redirect_to admin_url
+    else
+      flash[:error] = "JWT not valid!"
+      render action: :index
+    end
+  end
+
+private
+
+  def valid_against
+    @valid_against ||= INFO
   end
 
 end

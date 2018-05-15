@@ -5,13 +5,7 @@ class PostsControllerTest < ActionController::TestCase
   # Redefine authenticate for this request.  Useful for stubbing
   # out authentication behavior that you may not want to test.
   def as_an_admin
-    def @controller.current_user
-      @_cu ||= User.first
-    end
-
-    def @controller.authenticate
-      session[:admin] = true
-    end
+    @controller.session[:user] = "someone"
   end
 
   def valid_post_attributes
@@ -68,7 +62,7 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   def test_vandals_cannot_vandalize_by_creating
-    post :create, params: { slug: "im-with-stupid", content: "again, all your base are belong to us" }
+    post :create, params: { post: { slug: "im-with-stupid", content: "again, all your base are belong to us" } }
     assert_response :unauthorized
   end
 

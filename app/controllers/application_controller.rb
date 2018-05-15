@@ -4,12 +4,13 @@ class ApplicationController < ActionController::Base
   helper_method :no_users?
 
   def logged_in?
-    false
+    !!session[:user]
   end
 
   def no_users?
     false
   end
+
   def not_found
     logger.error "404 Not Found"
     render template: "errors/404", status: :not_found

@@ -4,4 +4,5 @@ saint:
   email: saint@example.com
   crypted_password: $2a$10$C.xBpbDYR1DKyQfTfm9BiOFze08ZhrjH/SAVjdboFxbmR9FcEDFdC
   salt: R5PYzAK3z4k9ex_r_d_g
-
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>
