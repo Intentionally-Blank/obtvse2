@@ -10,9 +10,7 @@ gem "puma"
 gem "jwt"
 
 # Frontend Utilities
-gem "handlebars"
 gem "slim"
-gem "stache"
 gem "webpacker"
 
 # Markdown

@@ -1,0 +1,6 @@
+<div class="auth-form">
+  <%= form_tag users_url(), method: :post do %>
+    <%= text_field_tag :jwt, "", class: "auth-form--input", autofocus: true, required: true %>
+    <%= submit_tag "Use this jwt", class: "auth-form--submit" %>
+  <% end %>
+</div>
