@@ -4,11 +4,10 @@ html lang="en-US"
   head
     title= html_title yield(:title).html_safe
     = csrf_meta_tag
-    = stylesheet_link_tag 'application'
+    = stylesheet_pack_tag 'application'
     meta content=INFO['name'] name="author"
     link href="#{rss_path}" rel="alternate" title="RSS" type="application/rss+xml"
     link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900' rel='stylesheet' type='text/css'
-    = javascript_include_tag 'application'
   body class="#{controller_name} #{action_name} #{logged_in? ? '' : 'not-'}logged-in #{no_users? ? 'no-users' : ''}"
     #sheet
     #body
@@ -40,12 +39,6 @@ html lang="en-US"
         .inner
           = yield
       .avgrund-cover
-    - unless logged_in?
-      aside#modal-login.avgrund-popup
-        - if no_users?
-          = render 'users/new_form'
-        - else
-          = render 'sessions/new_form'
     / Google Analytics
     - if INFO['ga_id']
       javascript:
@@ -53,3 +46,4 @@ html lang="en-US"
         (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
         g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
         s.parentNode.insertBefore(g,s)}(document,'script'));
+    = javascript_pack_tag 'application'
