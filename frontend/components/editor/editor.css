@@ -1,0 +1,28 @@
+input {
+  width: 100%;
+  margin: 1em 0;
+  border: none;
+  padding: 0.5em;
+}
+
+input#post_title {  font-size: 2em; }
+
+textarea {
+  width: 100%;
+  border: none;
+}
+
+textarea:focus { border: none; }
+
+button {
+  margin: 1em;
+  padding: 1em;
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
+button:hover {
+  color: white;
+  background: black;
+}

@@ -11,6 +11,7 @@ codename-obtvse:
   draft: false
   created_at: <%= 1.day.ago.to_s(:db) %>
   updated_at: <%= 1.day.ago.to_s(:db) %>
+  published_at: <%= 1.day.ago.to_s(:db) %>
 
 a-modest-proposal:
   title: "A Modest Proposal"
@@ -19,3 +20,4 @@ a-modest-proposal:
   draft: true
   created_at: <%= 1.day.ago.to_s(:db) %>
   updated_at: <%= 1.day.ago.to_s(:db) %>
+  published_at: <%= 1.day.ago.to_s(:db) %>

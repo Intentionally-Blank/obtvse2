@@ -1,0 +1,8 @@
+<div id="editor">
+  <%= form_for @post, url: @post_path do |f|  %>
+    <%= f.text_field :title, placeholder: "Title..." %>
+    <%= f.text_area :content, rows: 20, placeholder: "What's on your mind..." %>
+    <%= f.text_field :slug, placeholder: "slug-for-url" %>
+    <button type="submit">Save</button>
+  <% end %>
+</div>

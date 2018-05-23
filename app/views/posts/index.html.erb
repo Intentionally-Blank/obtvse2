@@ -1,0 +1,12 @@
+<h1>
+  <%= INFO[:title] %>
+</h1>
+<aside>
+  <h4><%= INFO[:name] %></h4>
+  <h6><%= INFO[:email] %></h6>
+</aside>
+<% @posts.each do |post| %>
+  <%= c("page") do %>
+    <%= c("post", post: post) %>
+  <% end %>
+<% end %>
