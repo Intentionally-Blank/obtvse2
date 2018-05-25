@@ -53,7 +53,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to "/#{@post.slug}/edit", notice: "Post created successfully" }
+        format.html { redirect_to edit_post_path(slug: @post.slug), notice: "Post created successfully" }
       else
         format.html { render action: "new" }
       end
@@ -66,7 +66,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update_attributes(params.require(:post).permit!)
-        format.html { redirect_to "/#{@post.slug}/edit", notice: "Post updated successfully" }
+        format.html { redirect_to edit_post_path(slug: @post.slug), notice: "Post updated successfully" }
       else
         format.html { render action: "edit" }
       end
@@ -74,7 +74,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by_slug(params[:slug])
+    @post = Post.from_slug(params[:slug])
     @post.destroy
     flash[:notice] = "Post has been deleted"
 
