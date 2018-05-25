@@ -1,0 +1,16 @@
+<article class="post">
+  <header>
+    <h2>
+      <%= post.title %>
+    </h2>
+  </header>
+  <section class="publishing">
+    Published : <time datetime="<%= post.published_at %>"><%= post.published_at.to_date.to_formatted_s(:db) %></time>
+  </section>
+  <section class="content">
+    <%= markdown(post.content) %>
+  </section>
+  <footer>
+    <%= link_to "&nbsp;".html_safe, post.slug, :class => 'permalink fas fa-anchor' %>
+  </footer>
+</article>

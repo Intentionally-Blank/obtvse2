@@ -1,1 +1,2 @@
-web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
+server: bin/rails server -b 0.0.0.0
+assets: bin/webpack-dev-server

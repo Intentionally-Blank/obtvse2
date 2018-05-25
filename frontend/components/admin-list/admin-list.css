@@ -1,0 +1,27 @@
+li.admin-item {
+  width: 100%;
+  list-style: none;
+}
+
+.admin-item a{
+  color: black;
+  padding: 0.5em;
+  text-align: center;
+  text-decoration: none;
+}
+.admin-item a:hover{
+  color: white;
+  background: black;
+}
+
+li.admin-item h3, li.admin-item ul {
+  width: 49%;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li.admin-item ul li {
+  display: inline-block;
+}

@@ -1,0 +1,18 @@
+<h1>Thoughts</h1>
+<ul>
+  <% posts.each do |post| %>
+  <li class="admin-item">
+    <h3>
+      <%= post.title %>
+    </h3>
+    <ul>
+      <li>
+        <%= link_to '<i class="fas fa-edit"></i> Edit'.html_safe, edit_post_url(slug: post.slug) %>
+      </li>
+      <li>
+        <%= link_to '<i class="fas fa-anchor"></i> URL'.html_safe, post_url(slug: post.slug) %>
+      </li>
+    </ul>
+  </li>
+  <% end %>
+</ul>

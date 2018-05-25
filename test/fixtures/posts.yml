@@ -9,9 +9,15 @@ codename-obtvse:
   slug: "codename-obtvse"
   content: "Earlier today I was browsing Hacker News and was a bit let down by a post I ran across by recent HN front-pager"
   draft: false
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>
+  published_at: <%= 1.day.ago.to_s(:db) %>
 
 a-modest-proposal:
   title: "A Modest Proposal"
   slug: "a-modest-proposal"
   content: "...for Preventing the Children of Poor People From Being a Burden on Their Parents or Country, and for Making Them Beneficial to the Publick"
   draft: true
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>
+  published_at: <%= 1.day.ago.to_s(:db) %>

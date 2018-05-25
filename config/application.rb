@@ -56,8 +56,13 @@ module Obtvse
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    
     config.generators do |g|
-      g.test_framework :minitest, spec: false, fixture: false
+      g.test_framework :minitest, spec: false
+      g.stylesheets    false
+      g.javascripts    false
+      g.helper         false
+      g.channel        assets: false
     end
   end
 end

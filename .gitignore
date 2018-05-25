@@ -11,17 +11,17 @@
 /vendor/bundle/*
 #/bin/
 
+# Ignore Javascript Cruft
+/node_modules/*
+/public/packs*
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
+*.log
 /tmp
 .DS_Store
 /coverage/*
-yarn-error.log
 
 # Ignore config
 /config/deploy.rb
 /config/database.yml
-
-# Ignore FE crift
-/node_modules
-/public/packs*

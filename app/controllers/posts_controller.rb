@@ -1,13 +1,11 @@
 class PostsController < ApplicationController
-  before_action :require_login, except: [:index, :show, :admin]
-  layout "admin", except: [:index, :show]
+  before_action :require_login, except: [:index, :show]
 
   def index
     @posts = Post.published.newest.page(params[:page]).per(8)
 
     respond_to do |format|
       format.html
-      format.xml { render xml: @posts }
       format.rss { render layout: false }
     end
   end
@@ -25,7 +23,6 @@ class PostsController < ApplicationController
       respond_to do |format|
         if @post.present?
           format.html
-          format.xml { render xml: @post }
         else
           format.any { render status: 404  }
         end
@@ -34,18 +31,7 @@ class PostsController < ApplicationController
   end
 
   def admin
-    if logged_in?
-      @no_header = true
-      @post = Post.new
-      @published = Post.published.newest
-      @drafts = Post.unpublished.order("updated_at desc")
-    else
-      if no_users?
-        render "users/create"
-      else
-        render_unauthorized
-      end
-    end
+    @posts = Post.order("updated_at desc").all
   end
 
   def new
@@ -58,7 +44,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:slug])
+    @post = Post.from_slug(params[:slug])
     @post_path = post_path(@post)
   end
 
@@ -67,13 +53,9 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to "/edit/#{@post.id}", notice: "Post created successfully" }
-        format.xml { render xml: @post, status: :created, location: @post }
-        format.text { render json: @post }
+        format.html { redirect_to edit_post_path(slug: @post.slug), notice: "Post created successfully" }
       else
         format.html { render action: "new" }
-        format.xml { render xml: @post.errors, status: :unprocessable_entity }
-        format.text { head :bad_request }
       end
     end
   end
@@ -84,31 +66,28 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update_attributes(params.require(:post).permit!)
-        format.html { redirect_to "/edit/#{@post.id}", notice: "Post updated successfully" }
-        format.xml { head :ok }
-        format.text { render json: @post }
+        format.html { redirect_to edit_post_path(slug: @post.slug), notice: "Post updated successfully" }
       else
         format.html { render action: "edit" }
-        format.xml { render xml: @post.errors, status: :unprocessable_entity }
-        format.text { head :bad_request }
       end
     end
   end
 
   def destroy
-    @post = Post.find_by_slug(params[:slug])
+    @post = Post.from_slug(params[:slug])
     @post.destroy
     flash[:notice] = "Post has been deleted"
 
     respond_to do |format|
       format.html { redirect_to "/admin" }
-      format.xml { head :ok }
     end
   end
 
 private
 
-  def admin?
-    session[:admin] == true
+  def require_login
+    unless session[:user]
+      render_unauthorized && return
+    end
   end
 end
