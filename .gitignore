@@ -14,6 +14,7 @@
 # Ignore Javascript Cruft
 /node_modules/*
 /public/packs*
+/public/packs/*
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
