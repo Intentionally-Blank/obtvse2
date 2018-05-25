@@ -16,7 +16,12 @@
 /tmp
 .DS_Store
 /coverage/*
+yarn-error.log
 
 # Ignore config
 /config/deploy.rb
 /config/database.yml
+
+# Ignore FE crift
+/node_modules
+/public/packs*
