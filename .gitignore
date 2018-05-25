@@ -11,12 +11,20 @@
 /vendor/bundle/*
 #/bin/
 
+# Ignore Javascript Cruft
+/node_module/*
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
+*.log
 /tmp
 .DS_Store
 /coverage/*
 
 # Ignore config
 /config/deploy.rb
-/config/database.yml
+/config/database.yml/public/packs
+/public/packs-test
+/node_modules
+yarn-debug.log*
+.yarn-integrity

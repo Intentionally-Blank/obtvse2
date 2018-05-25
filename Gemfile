@@ -10,10 +10,7 @@ gem "puma"
 gem "jwt"
 
 # Frontend Utilities
-gem "compass-rails"
-gem "jquery-rails"
-gem "slim"
-gem "turbolinks"
+gem "webpacker"
 
 # Markdown
 gem "coderay"
@@ -29,6 +26,7 @@ gem "stringex", github: "rsl/stringex"
 group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
+  gem "listen", ">= 3.0.5", "< 3.2"
   gem "minitest-rails"
   gem "pry"
   gem "pry-doc"
@@ -36,6 +34,7 @@ group :development, :test do
   gem "rubocop-rails"
   gem "simplecov", require: false
   gem "spring"
+  gem "spring-watcher-listen", "~> 2.0.0"
 end
 
 group :assets do
