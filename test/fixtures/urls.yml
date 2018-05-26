@@ -1,0 +1,20 @@
+co-url:
+  post: codename-obtvse
+  slug: "codename-obtvse"
+  canonical: true
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>
+
+amp-url:
+  post: a-modest-proposal
+  slug: "a-modest-proposal"
+  canonical: true
+  created_at: <%= 1.hour.ago.to_s(:db) %>
+  updated_at: <%= 1.hour.ago.to_s(:db) %>
+
+amp-old-url:
+  post: a-modest-proposal
+  slug: "a-proposal"
+  canonical: false
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>

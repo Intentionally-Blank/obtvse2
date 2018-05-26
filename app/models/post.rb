@@ -1,38 +1,23 @@
 class Post < ActiveRecord::Base
 
-  validates :slug, presence: true, uniqueness: true
-  validates :title, presence: true
-
-  acts_as_url :title, url_attribute: :slug
-
-  scope :unpublished, -> { where(draft: true) }
-  scope :published, -> { where(draft: false) }
-  scope :newest, -> { order("published_at desc") }
-  scope :oldest, -> { order("published_at asc") }
-  scope :previous, lambda { |post| where("published_at < ?", post.published_at).newest }
-  scope :next, lambda { |post| where("published_at > ?", post.published_at).newest }
-  scope :ambiguous_slug, lambda { |slug| slug.to_i.to_s == slug ? where(id: slug) : where(slug: slug) }
-
-  before_save :update_published_at
+  has_many :revisions
+  has_many :urls
 
   def self.from_slug(slug)
-    self.ambiguous_slug(slug).first
+    Url.find_by(slug: slug).post
   end
 
-  def to_param
-    slug
+  def title
+    revisions.published.newest.first.title
   end
 
-  def external?
-    !url.blank?
+  def content
+    revisions.published.newest.first.content
   end
 
-private
-
-  def update_published_at
-    if published_at.nil? && draft == false
-      self.published_at = Time.now
-    end
+  def slug
+    urls.canonical.first.slug
   end
+
 
 end
