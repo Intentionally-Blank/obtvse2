@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if token.valid?
       session[:user] = token.grants[:sub]
       flash[:notice] = "Successfully Logged In"
-      redirect_to admin_url
+      redirect_to admin_posts_url
     else
       flash[:error] = "JWT not valid!"
       render action: :index

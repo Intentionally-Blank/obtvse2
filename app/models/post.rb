@@ -1,7 +1,9 @@
 class Post < ActiveRecord::Base
 
-  has_many :revisions
-  has_many :urls
+  has_many :revisions, dependent: :destroy
+  has_many :urls, dependent: :destroy
+
+  accepts_nested_attributes_for :revisions, :urls
 
   def self.from_slug(slug)
     Url.find_by(slug: slug).post
@@ -26,4 +28,5 @@ class Post < ActiveRecord::Base
   def published?
     revisions.pluck(:published).inject(false) {|m,x| m || x}
   end
+
 end
