@@ -41,4 +41,18 @@ class PostTest < ActiveSupport::TestCase
     assert posts("a-modest-proposal").published?
     assert_not posts("to-himself").published?
   end
+
+  def test_updating_with_identical_data
+    subject = Post.create(valid_post_attributes)
+    subject.update(valid_post_attributes)
+    subject.reload
+    assert_equal 2, subject.revisions.count
+    assert_equal 1, subject.urls.count
+  end
+
+  def test_duplicates_are_rejected
+    Post.create(valid_post_attributes)
+    subject = Post.create(valid_post_attributes)
+    assert_not subject.persisted?
+  end
 end

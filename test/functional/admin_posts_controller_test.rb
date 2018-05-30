@@ -8,17 +8,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     @controller.session[:user] = "someone"
   end
 
-  def valid_post_attributes
-    {
-      urls_attributes: [{slug: "a-tale-of-two-cities"}],
-      revisions_attributes: [{
-        title:     "A Tale of Two Cities",
-        content:   "It was the best of times",
-        published: true
-      }]
-    }
-  end
-
   def test_spies_cannot_use_the_admin_list
     get :index
     assert_response :unauthorized

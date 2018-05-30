@@ -3,10 +3,17 @@ class Post < ActiveRecord::Base
   has_many :revisions, dependent: :destroy
   has_many :urls, dependent: :destroy
 
-  accepts_nested_attributes_for :revisions, :urls
+  accepts_nested_attributes_for :revisions
+  accepts_nested_attributes_for :urls,
+                                reject_if: :has_existing_slug
+
 
   def self.from_slug(slug)
     Url.find_by(slug: slug).post
+  end
+
+  def has_existing_slug(attr)
+    Url.where(slug: attr[:slug], post_id: id).count > 0 
   end
 
   def title
@@ -26,7 +33,7 @@ class Post < ActiveRecord::Base
   end
 
   def published?
-    revisions.pluck(:published).inject(false) {|m,x| m || x}
+    revisions.pluck(:published).inject(false) { |m, x| m || x }
   end
 
 end
