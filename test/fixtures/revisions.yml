@@ -6,6 +6,14 @@ co-v1:
   created_at: <%= 1.day.ago.to_s(:db) %>
   updated_at: <%= 1.day.ago.to_s(:db) %>
 
+co-v2:
+  post: codename-obtvse
+  published: true
+  title: "Codename: Obtvse"
+  content: "Earlier today I was browsing Hacker News and was a bit let down by a post I ran across by recent HN front-pager"
+  created_at: <%= 1.hour.ago.to_s(:db) %>
+  updated_at: <%= 1.hour.ago.to_s(:db) %>
+
 amp-v1:
   post: a-modest-proposal
   published: true
@@ -17,7 +25,16 @@ amp-v1:
 amp-v2:
   post: a-modest-proposal
   published: false
-  title: "A Modest Proposal"
+  title: "A Modest-ish Proposal"
   content: "Just Kidding...."
   created_at: <%= 1.minute.ago.to_s(:db) %>
   updated_at: <%= 1.minute.ago.to_s(:db) %>
+
+himself-v1:
+  post: to-himself
+  published: false
+  title: "Meditations"
+  content: "You have to assemble your life yourself—action by action. And be satisfied if each one achieves its goal, as far as it can."
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>
+

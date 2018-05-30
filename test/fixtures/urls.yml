@@ -18,3 +18,10 @@ amp-old-url:
   canonical: false
   created_at: <%= 1.day.ago.to_s(:db) %>
   updated_at: <%= 1.day.ago.to_s(:db) %>
+
+himself-url:
+  post: to-himself
+  slug: "to-himself"
+  canonical: true
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>

@@ -5,7 +5,10 @@
     </h2>
   </header>
   <section class="publishing">
-    Published : <time datetime="<%= post.published_at %>"><%= post.published_at.to_date.to_formatted_s(:db) %></time>
+    Published :
+    <% post.published_at.each do |pub_datetime| %>
+      <time datetime="<%= pub_datetime %>"><%= pub_datetime.to_date.to_formatted_s(:db) %></time>
+    <% end %>
   </section>
   <section class="content">
     <%= markdown(post.content) %>

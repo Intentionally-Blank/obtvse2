@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :require_login, except: [:index, :show]
 
   def index
-    @posts = Post.published.newest.page(params[:page]).per(8)
+    @posts = PublicPost.list(page: params[:page])
 
     respond_to do |format|
       format.html
@@ -11,23 +11,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @single_post = true
-    @post = Post.from_slug(params[:slug])
-
-    if @post.nil? || (@post.draft && !logged_in?)
-      not_found
-    else
-      @next = Post.next(@post).last
-      @previous = Post.previous(@post).first
-
-      respond_to do |format|
-        if @post.present?
-          format.html
-        else
-          format.any { render status: 404  }
-        end
-      end
-    end
+    @post = PublicPost.from_slug(params[:slug])
+    not_found unless @post.published?
   end
 
   def admin

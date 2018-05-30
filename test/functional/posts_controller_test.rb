@@ -20,13 +20,13 @@ class PostsControllerTest < ActionController::TestCase
   def test_anyone_can_list_the_posts
     get :index
     published = posts("codename-obtvse")
-    assert assigns(:posts).include?(published), "Posts should include published posts"
+    assert assigns(:posts).map(&:id).include?(published.id), "Posts should include published posts"
     assert_response :ok
   end
 
   def test_spies_cannot_spy_by_listing_drafts
     get :index
-    draft = posts("a-modest-proposal")
+    draft = posts("to-himself")
     assert ! assigns(:posts).include?(draft), "Posts should not include drafts"
     assert_response :ok
   end
@@ -42,7 +42,7 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   def test_spies_cannot_spy_by_reading_drafts
-    get :show, params: { slug: "a-modest-proposal" }
+    get :show, params: { slug: "to-himself" }
     assert_response :not_found
   end
 

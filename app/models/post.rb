@@ -8,16 +8,22 @@ class Post < ActiveRecord::Base
   end
 
   def title
-    revisions.published.newest.first.title
+    revisions.newest.first.title
   end
 
   def content
-    revisions.published.newest.first.content
+    revisions.newest.first.content
   end
 
   def slug
     urls.canonical.first.slug
   end
 
+  def published_at
+    revisions.published.newest.pluck(:updated_at)
+  end
 
+  def published?
+    revisions.pluck(:published).inject(false) {|m,x| m || x}
+  end
 end
