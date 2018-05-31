@@ -31,6 +31,21 @@ class PostTest < ActiveSupport::TestCase
     assert_equal posts("codename-obtvse"), Post.from_slug("codename-obtvse")
   end
 
+  def test_is_findable_by_old_slug
+    subject = Post.from_slug("a-proposal")
+    assert_equal posts("a-modest-proposal"), subject
+  end
+
+  def test_most_recent_slug_is_canonical
+    subject = Post.from_slug("a-proposal")
+    assert_equal "a-modest-proposal", subject.slug
+  end
+
+  def test_most_recent_slug_is_canonical_unless_explicit
+    subject = Post.from_slug("meditations")
+    assert_equal "to-himself", subject.slug
+  end
+
   def test_handles_multiple_publishes
     subject = posts("codename-obtvse")
     assert_equal 2, subject.published_at.count

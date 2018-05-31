@@ -41,4 +41,9 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :not_found
   end
 
+  def test_redirects_to_canonical_slug
+    get :show, params: { slug: "a-proposal" }
+    assert_response :redirect
+  end
+
 end

@@ -1,14 +1,14 @@
 co-url:
   post: codename-obtvse
   slug: "codename-obtvse"
-  canonical: true
+  canonical: false
   created_at: <%= 1.day.ago.to_s(:db) %>
   updated_at: <%= 1.day.ago.to_s(:db) %>
 
 amp-url:
   post: a-modest-proposal
   slug: "a-modest-proposal"
-  canonical: true
+  canonical: false
   created_at: <%= 1.hour.ago.to_s(:db) %>
   updated_at: <%= 1.hour.ago.to_s(:db) %>
 
@@ -23,5 +23,12 @@ himself-url:
   post: to-himself
   slug: "to-himself"
   canonical: true
+  created_at: <%= 1.year.ago.to_s(:db) %>
+  updated_at: <%= 1.year.ago.to_s(:db) %>
+
+himself-url-avoided:
+  post: to-himself
+  slug: "meditations"
+  canonical: false
   created_at: <%= 1.day.ago.to_s(:db) %>
   updated_at: <%= 1.day.ago.to_s(:db) %>

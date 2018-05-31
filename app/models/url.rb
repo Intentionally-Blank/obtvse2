@@ -5,4 +5,5 @@ class Url < ActiveRecord::Base
   validates :slug, uniqueness: true
 
   scope :canonical, -> { where(canonical: true) }
+  scope :newest, -> { order("updated_at desc") }
 end

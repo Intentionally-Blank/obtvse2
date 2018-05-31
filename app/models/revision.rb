@@ -2,6 +2,8 @@ class Revision < ActiveRecord::Base
 
   belongs_to :post
 
+  validates :title, :content, presence: true
+
   scope :published, -> { where(published: true) }
-  scope :newest, -> { order("updated_at desc") }
+
 end
