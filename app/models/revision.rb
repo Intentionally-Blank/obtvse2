@@ -4,6 +4,7 @@ class Revision < ActiveRecord::Base
 
   validates :title, :content, presence: true
 
+  scope :newest, -> { order("updated_at desc") }
   scope :published, -> { where(published: true) }
 
 end

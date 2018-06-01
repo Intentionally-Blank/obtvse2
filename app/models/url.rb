@@ -6,4 +6,5 @@ class Url < ActiveRecord::Base
 
   scope :canonical, -> { where(canonical: true) }
   scope :newest, -> { order("updated_at desc") }
+
 end
