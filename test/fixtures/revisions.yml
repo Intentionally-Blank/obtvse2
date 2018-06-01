@@ -1,0 +1,40 @@
+co-v1:
+  post: codename-obtvse
+  published: true
+  title: "Codename: Obtvse"
+  content: "Earlier today I was browsing Hacker News and was a bit let down by a post I ran across by recent HN front-pager"
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>
+
+co-v2:
+  post: codename-obtvse
+  published: true
+  title: "Codename: Obtvse"
+  content: "Earlier today I was browsing Hacker News and was a bit let down by a post I ran across by recent HN front-pager"
+  created_at: <%= 1.hour.ago.to_s(:db) %>
+  updated_at: <%= 1.hour.ago.to_s(:db) %>
+
+amp-v1:
+  post: a-modest-proposal
+  published: true
+  title: "A Modest Proposal"
+  content: "...for Preventing the Children of Poor People From Being a Burden on Their Parents or Country, and for Making Them Beneficial to the Publick"
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>
+
+amp-v2:
+  post: a-modest-proposal
+  published: false
+  title: "A Modest-ish Proposal"
+  content: "Just Kidding...."
+  created_at: <%= 1.minute.ago.to_s(:db) %>
+  updated_at: <%= 1.minute.ago.to_s(:db) %>
+
+himself-v1:
+  post: to-himself
+  published: false
+  title: "Meditations"
+  content: "You have to assemble your life yourself—action by action. And be satisfied if each one achieves its goal, as far as it can."
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>
+

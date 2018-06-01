@@ -44,14 +44,8 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.posts (
     id integer NOT NULL,
-    title character varying NOT NULL,
-    slug character varying NOT NULL,
-    content text,
-    draft boolean DEFAULT true,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    url character varying,
-    published_at timestamp without time zone
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -85,7 +79,8 @@ CREATE TABLE public.revisions (
     post_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    title character varying NOT NULL
+    title character varying NOT NULL,
+    published boolean DEFAULT false
 );
 
 
@@ -152,6 +147,39 @@ ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 
 
 --
+-- Name: urls; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.urls (
+    id bigint NOT NULL,
+    slug character varying NOT NULL,
+    canonical boolean DEFAULT false NOT NULL,
+    post_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: urls_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.urls_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: urls_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.urls_id_seq OWNED BY public.urls.id;
+
+
+--
 -- Name: posts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -170,6 +198,13 @@ ALTER TABLE ONLY public.revisions ALTER COLUMN id SET DEFAULT nextval('public.re
 --
 
 ALTER TABLE ONLY public.sessions ALTER COLUMN id SET DEFAULT nextval('public.sessions_id_seq'::regclass);
+
+
+--
+-- Name: urls id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.urls ALTER COLUMN id SET DEFAULT nextval('public.urls_id_seq'::regclass);
 
 
 --
@@ -205,6 +240,14 @@ ALTER TABLE ONLY public.sessions
 
 
 --
+-- Name: urls urls_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.urls
+    ADD CONSTRAINT urls_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: index_sessions_on_session_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -219,10 +262,25 @@ CREATE INDEX index_sessions_on_updated_at ON public.sessions USING btree (update
 
 
 --
+-- Name: index_urls_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_urls_on_slug ON public.urls USING btree (slug);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
+
+
+--
+-- Name: urls fk_rails_d779dbb185; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.urls
+    ADD CONSTRAINT fk_rails_d779dbb185 FOREIGN KEY (post_id) REFERENCES public.posts(id);
 
 
 --
@@ -261,6 +319,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20121229190107'),
 ('20130809232825'),
 ('20180513220052'),
-('20180515151847');
+('20180515151847'),
+('20180525213226'),
+('20180525222439');
 
 

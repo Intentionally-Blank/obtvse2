@@ -1,38 +1,39 @@
 class Post < ActiveRecord::Base
 
-  validates :slug, presence: true, uniqueness: true
-  validates :title, presence: true
+  has_many :revisions, dependent: :destroy
+  has_many :urls, dependent: :destroy
 
-  acts_as_url :title, url_attribute: :slug
+  accepts_nested_attributes_for :revisions
+  accepts_nested_attributes_for :urls,
+                                reject_if: :has_existing_slug
 
-  scope :unpublished, -> { where(draft: true) }
-  scope :published, -> { where(draft: false) }
-  scope :newest, -> { order("published_at desc") }
-  scope :oldest, -> { order("published_at asc") }
-  scope :previous, lambda { |post| where("published_at < ?", post.published_at).newest }
-  scope :next, lambda { |post| where("published_at > ?", post.published_at).newest }
-  scope :ambiguous_slug, lambda { |slug| slug.to_i.to_s == slug ? where(id: slug) : where(slug: slug) }
-
-  before_save :update_published_at
 
   def self.from_slug(slug)
-    self.ambiguous_slug(slug).first
+    Url.find_by(slug: slug).post
   end
 
-  def to_param
-    slug
+  def has_existing_slug(attr)
+    Url.where(slug: attr[:slug], post_id: id).count > 0
   end
 
-  def external?
-    !url.blank?
+  def title
+    revisions.newest.first.title
   end
 
-private
+  def content
+    revisions.newest.first.content
+  end
 
-  def update_published_at
-    if published_at.nil? && draft == false
-      self.published_at = Time.now
-    end
+  def slug
+    urls.canonical.first.try(:slug) || urls.newest.first.slug
+  end
+
+  def published_at
+    revisions.published.newest.pluck(:updated_at)
+  end
+
+  def published?
+    revisions.pluck(:published).inject(false) { |m, x| m || x }
   end
 
 end

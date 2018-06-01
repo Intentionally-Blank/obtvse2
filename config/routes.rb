@@ -1,7 +1,9 @@
 Obtvse::Application.routes.draw do
 
   # Admin
-  get '/admin' => 'posts#admin', as: 'admin'
+  namespace :admin do
+    resources :posts
+  end
 
   get '/posts(.:format)' => 'posts#index'
   get '/posts.rss' => 'posts#index', as: 'rss'

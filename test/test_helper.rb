@@ -16,4 +16,15 @@ class ActiveSupport::TestCase
   fixtures :all
   self.use_transactional_tests = true
   # Add more helper methods to be used by all tests here...
+
+  def valid_post_attributes
+    {
+      urls_attributes: [{slug: "a-tale-of-two-cities"}],
+      revisions_attributes: [{
+        title:     "A Tale of Two Cities",
+        content:   "It was the best of times",
+        published: true
+      }]
+    }
+  end
 end
