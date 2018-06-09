@@ -15,21 +15,6 @@
 
   textarea:focus { border: none; }
 
-  button {
-    margin: 1em;
-    padding: 1em;
-    background: white;
-    color: black;
-    border: 1px solid black;
-    clear: both;
-    display: block;
-  }
-
-  button:hover {
-    color: white;
-    background: black;
-  }
-
   label {
     display: inline-block;
     width: 15%;

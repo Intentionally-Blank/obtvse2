@@ -16,3 +16,18 @@ body.posts.index aside {
   margin: 0 auto;
   text-align: center;
 }
+
+button {
+  margin: 1em;
+  padding: 1em;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  clear: both;
+  display: block;
+}
+
+button:hover {
+  color: white;
+  background: black;
+}
