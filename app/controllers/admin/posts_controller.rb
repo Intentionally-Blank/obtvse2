@@ -9,7 +9,7 @@ class Admin::PostsController < AdminController
   end
 
   def new
-    @post = Post.new()
+    @post = build_sentinel_post
     @admin_post_path = admin_posts_path()
   end
 
@@ -31,7 +31,8 @@ class Admin::PostsController < AdminController
   def update
     @post = Post.find(params[:id])
     logger.info @post
-
+    logger.info "#"*88
+    logger.info params.require(:post).permit!
     if @post.update_attributes(params.require(:post).permit!)
       redirect_to edit_admin_post_path(@post), notice: "Post updated successfully"
     else
@@ -44,6 +45,14 @@ class Admin::PostsController < AdminController
     @post.destroy
     flash[:notice] = "Post has been deleted"
     redirect_to "/admin"
+  end
+
+private
+
+  def build_sentinel_post
+    Post.new().
+      tap { |post| post.revisions << Revision.new() }.
+      tap { |post| post.urls << Url.new() }
   end
 
 end

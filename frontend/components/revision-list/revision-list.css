@@ -1,0 +1,17 @@
+.admin-slash-revisions {
+  table { width: 100%;}
+  td {
+    width: 24%;
+
+    a{
+      color: black;
+      padding: 0.5em;
+      text-align: center;
+      text-decoration: none;
+    }
+    a:hover{
+      color: white;
+      background: black;
+    }
+  }
+}

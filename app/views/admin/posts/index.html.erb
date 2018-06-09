@@ -1,6 +1,6 @@
 <%= c("page") do %>
   <%= c("admin-list", posts: @posts) %>
-  <a href="<%= new_post_path() %>">
+  <a href="<%= new_admin_post_path() %>">
     <button>New Post</button>
   </a>
 <% end %>

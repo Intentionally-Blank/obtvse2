@@ -13,7 +13,7 @@
     <%= javascript_pack_tag 'application' %>
   </head>
 
-  <body class="<%= params[:controller] %> <%= params[:action] %>">
+  <body class="<%= params[:controller].to_url %> <%= params[:action] %>">
     <%= yield %>
   </body>
 </html>

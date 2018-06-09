@@ -12,9 +12,10 @@ gem "jwt"
 # Frontend Utilities
 gem "webpacker"
 
-# Markdown
+# Markdown/String Utilities
 gem "coderay"
 gem "kramdown", require: false
+gem "diffy"
 
 # Pagination
 gem "kaminari"

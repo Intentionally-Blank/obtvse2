@@ -41,11 +41,6 @@ class PostTest < ActiveSupport::TestCase
     assert_equal "a-modest-proposal", subject.slug
   end
 
-  def test_most_recent_slug_is_canonical_unless_explicit
-    subject = Post.from_slug("meditations")
-    assert_equal "to-himself", subject.slug
-  end
-
   def test_handles_multiple_publishes
     subject = posts("codename-obtvse")
     assert_equal 2, subject.published_at.count
@@ -65,9 +60,17 @@ class PostTest < ActiveSupport::TestCase
     assert_equal 1, subject.urls.count
   end
 
+  def test_updating_with_identical_data_updates_url
+    subject = Post.create(valid_post_attributes)
+    subject.update(valid_post_attributes)
+    subject.reload
+    assert_not_equal subject.urls.first.created_at, subject.urls.first.updated_at
+  end
+
   def test_duplicates_are_rejected
     Post.create(valid_post_attributes)
     subject = Post.create(valid_post_attributes)
     assert_not subject.persisted?
   end
+
 end

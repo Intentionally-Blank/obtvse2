@@ -14,6 +14,6 @@
     <%= markdown(post.content) %>
   </section>
   <footer>
-    <%= link_to "&nbsp;".html_safe, post.slug, :class => 'permalink fas fa-anchor' %>
+    <%= link_to "<i class=\"fas fa-anchor\"></i>&nbsp;#{post_url(slug: post.slug)}".html_safe, post_url(slug: post.slug), class: 'permalink' %>
   </footer>
 </article>

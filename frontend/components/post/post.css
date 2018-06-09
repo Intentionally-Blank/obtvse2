@@ -1,3 +1,11 @@
-section.publishing {
-  font-size: 0.7em;
+.post {
+
+  section.publishing {
+    font-size: 0.7em;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
 }

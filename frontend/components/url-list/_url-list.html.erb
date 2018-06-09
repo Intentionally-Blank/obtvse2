@@ -1,0 +1,8 @@
+<% canonical =  @urls.first.slug %>
+<h1>Urls for this post</h1>
+<h2> <%= post_url(slug: canonical) %> is canonical</h2>
+<ul>
+  <% @urls[1..-1].each do |url| %>
+    <li> <%= post_url(slug: url.slug) %> will redirect to <%= post_url(slug: canonical) %> </li>
+  <% end %>
+</ul>
