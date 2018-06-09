@@ -6,8 +6,11 @@
       <%= label_tag(:published, "This is published") %>
       <%= r.check_box :published  %>
     <% end %>
-    <%= f.fields_for :urls, @post.urls.newest.first, include_id: false do |u| %>
+    <%= f.fields_for :urls, @post.canonical_url, include_id: false do |u| %>
       <%= u.text_field :slug, placeholder: "slug-for-url" %>
+      <% if @post.urls.count > 1 %>
+        <%= link_to"Other slugs for this post", admin_post_urls_url(post_id: @post) %>
+      <% end %>
     <% end %>
     <button type="submit">Save</button>
   <% end %>

@@ -13,11 +13,20 @@ class Post < ActiveRecord::Base
   end
 
   def has_existing_slug(attr)
-    Url.where(slug: attr[:slug], post_id: id).count > 0
+    if Url.where(slug: attr[:slug], post_id: id).count > 0
+      Url.where(slug: attr[:slug], post_id: id).first.touch
+      true
+    else
+      false
+    end
   end
 
   def current_revision
     revisions.newest.first
+  end
+
+  def canonical_url
+    urls.newest.first
   end
 
   def title
@@ -29,7 +38,7 @@ class Post < ActiveRecord::Base
   end
 
   def slug
-    urls.canonical.first.try(:slug) || urls.newest.first.slug
+    canonical_url.slug
   end
 
   def published_at

@@ -4,7 +4,7 @@ Obtvse::Application.routes.draw do
   namespace :admin do
     resources :posts do
       resources :revisions, only: [:index, :show]
-      resources :urls
+      resources :urls, only: :index
     end
   end
 

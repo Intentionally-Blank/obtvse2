@@ -153,7 +153,6 @@ ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 CREATE TABLE public.urls (
     id bigint NOT NULL,
     slug character varying NOT NULL,
-    canonical boolean DEFAULT false NOT NULL,
     post_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -321,6 +320,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180513220052'),
 ('20180515151847'),
 ('20180525213226'),
-('20180525222439');
+('20180525222439'),
+('20180609185341');
 
 

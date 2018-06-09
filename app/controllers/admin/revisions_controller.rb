@@ -1,7 +1,7 @@
 class Admin::RevisionsController < AdminController
 
   def index
-    @revisions = Post.find(params[:post_id]).revisions.order("updated_at desc")
+    @revisions = Post.find(params[:post_id]).revisions.newest
   end
 
   def show

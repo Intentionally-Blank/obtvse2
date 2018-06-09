@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
   def show
     @post = PublicPost.from_slug(params[:slug])
-    not_found unless @post.published?
+    not_found and return unless @post.published?
     redirect_to post_url(slug: @post.slug) unless params[:slug] == @post.slug
   end
 end
