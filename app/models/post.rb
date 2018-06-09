@@ -16,12 +16,16 @@ class Post < ActiveRecord::Base
     Url.where(slug: attr[:slug], post_id: id).count > 0
   end
 
+  def current_revision
+    revisions.newest.first
+  end
+
   def title
-    revisions.newest.first.title
+    current_revision.title
   end
 
   def content
-    revisions.newest.first.content
+    current_revision.content
   end
 
   def slug

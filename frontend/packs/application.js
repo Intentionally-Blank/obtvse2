@@ -5,3 +5,5 @@ import "components/auth-form/auth-form";
 import "components/post/post";
 import "components/editor/editor";
 import "components/admin-list/admin-list";
+import "components/revision-list/revision-list";
+import "components/revision-diff/revision-diff";

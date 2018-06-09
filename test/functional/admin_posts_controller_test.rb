@@ -62,7 +62,9 @@ class Admin::PostsControllerTest < ActionController::TestCase
     as_an_admin
     attrs = valid_post_attributes
     attrs[:revisions_attributes].first[:content] = "It is a melancholy object to those, who walk through this great town, or travel in the country"
-    put :update, params: { id: posts("a-modest-proposal").id, post: attrs }
+    assert_changes -> { Post.find(posts("a-modest-proposal").id).revisions.count } do
+      put :update, params: { id: posts("a-modest-proposal").id, post: attrs }
+    end
     assert_response :redirect
   end
 

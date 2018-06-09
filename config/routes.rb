@@ -2,17 +2,17 @@ Obtvse::Application.routes.draw do
 
   # Admin
   namespace :admin do
-    resources :posts
+    resources :posts do
+      resources :revisions, only: [:index, :show]
+      resources :urls
+    end
   end
 
-  get '/posts(.:format)' => 'posts#index'
   get '/posts.rss' => 'posts#index', as: 'rss'
 
   resources :users
   resources :sessions
-  resources :posts, path: '/', param: :slug
-
-  get '/:slug' => 'posts#show', as: 'post_slug'
+  resources :posts, path: '/', param: :slug, only: [:index, :show]
 
   root to: 'posts#index'
 
