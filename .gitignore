@@ -26,3 +26,4 @@
 # Ignore config
 /config/deploy.rb
 /config/database.yml
+.env

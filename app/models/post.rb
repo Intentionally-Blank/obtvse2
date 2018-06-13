@@ -1,4 +1,4 @@
-class Post < ActiveRecord::Base
+class Post < ApplicationRecord
 
   has_many :revisions, dependent: :destroy
   has_many :urls, dependent: :destroy
