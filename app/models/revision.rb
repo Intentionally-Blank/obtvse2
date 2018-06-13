@@ -1,4 +1,4 @@
-class Revision < ActiveRecord::Base
+class Revision < ApplicationRecord
 
   belongs_to :post
 

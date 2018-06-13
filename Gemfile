@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 ruby "2.5.0"
 
+gem "dotenv-rails", groups: [:development, :test]
+
 gem "rails", "5.2.0"
 gem "activerecord-session_store"
 gem "pg"
@@ -14,15 +16,15 @@ gem "webpacker"
 
 # Markdown/String Utilities
 gem "coderay"
-gem "kramdown", require: false
 gem "diffy"
+gem "kramdown", require: false
+gem "stringex", github: "rsl/stringex"
 
 # Pagination
 gem "kaminari"
 
-# Date/URL Utilities
+# Date Utilities
 gem "chronic"
-gem "stringex", github: "rsl/stringex"
 
 group :development, :test do
   gem "better_errors"

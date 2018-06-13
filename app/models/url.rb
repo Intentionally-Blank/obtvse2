@@ -1,4 +1,4 @@
-class Url < ActiveRecord::Base
+class Url < ApplicationRecord
 
   belongs_to :post
 
