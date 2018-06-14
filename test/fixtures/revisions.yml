@@ -3,16 +3,16 @@ co-v1:
   published: true
   title: "Codename: Obtvse"
   content: "Earlier today I was browsing Hacker News and was a bit let down by a post I ran across by recent HN front-pager"
-  created_at: <%= 1.day.ago.to_s(:db) %>
-  updated_at: <%= 1.day.ago.to_s(:db) %>
+  created_at: <%= 1.year.ago.to_s(:db) %>
+  updated_at: <%= 1.year.ago.to_s(:db) %>
 
 co-v2:
   post: codename-obtvse
   published: true
   title: "Codename: Obtvse"
   content: "Earlier today I was browsing Hacker News and was a bit let down by a post I ran across by recent HN front-pager"
-  created_at: <%= 1.hour.ago.to_s(:db) %>
-  updated_at: <%= 1.hour.ago.to_s(:db) %>
+  created_at: <%= 1.month.ago.to_s(:db) %>
+  updated_at: <%= 1.month.ago.to_s(:db) %>
 
 amp-v1:
   post: a-modest-proposal

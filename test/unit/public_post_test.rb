@@ -2,9 +2,15 @@ require "test_helper"
 
 class PublicPostTest < ActiveSupport::TestCase
 
-  def test_can_list_published_posts
-    subject = PublicPost.list()
+  def test_can_list_index_posts
+    subject = PublicPost.index()
     assert_equal 2, subject.count
+  end
+
+  def test_can_list_by_page
+    page_id = PublicPost.find(posts("codename-obtvse").id).date_page
+    subject = PublicPost.list(page_id)
+    assert_includes subject, posts("codename-obtvse")
   end
 
   def test_has_only_published_content
@@ -15,6 +21,10 @@ class PublicPostTest < ActiveSupport::TestCase
   def test_has_only_published_title
     subject = PublicPost.from_slug("a-modest-proposal")
     assert_equal "A Modest Proposal", subject.title
+  end
+
+  def test_knows_next_oldest_valid_page
+    
   end
 
 end

@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :urls,
                                 reject_if: :has_existing_slug
 
+  scope :newest, -> { order("updated_at desc") }
 
   def self.from_slug(slug)
     Url.find_by(slug: slug).post

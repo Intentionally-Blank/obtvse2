@@ -2,25 +2,18 @@ require "test_helper"
 
 class PostsControllerTest < ActionController::TestCase
 
-  # Redefine authenticate for this request.  Useful for stubbing
-  # out authentication behavior that you may not want to test.
-  def as_an_admin
-    @controller.session[:user] = "someone"
-  end
-
-  def valid_post_attributes
-    {
-      slug: "a-tale-of-two-cities",
-      title: "A Tale of Two Cities",
-      content: "It was the best of times",
-      draft: false
-    }
-  end
-
   def test_anyone_can_list_the_posts
     get :index
     published = posts("codename-obtvse")
     assert assigns(:posts).map(&:id).include?(published.id), "Posts should include published posts"
+    assert_response :ok
+  end
+
+  def test_anyone_can_page_posts
+    page_id = PublicPost.find(posts("codename-obtvse").id).date_page
+    get :index, params: { page: page_id }
+    published = posts("codename-obtvse")
+    assert assigns(:posts).map(&:id).include?(published.id)
     assert_response :ok
   end
 

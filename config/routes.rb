@@ -9,6 +9,8 @@ Obtvse::Application.routes.draw do
   end
 
   get '/posts.rss' => 'posts#index', as: 'rss'
+  get '/p/:page'   => 'posts#index', as: 'page'
+  get '/p/:page/posts.rss'   => 'posts#index', as: 'rss_page'
 
   resources :users
   resources :sessions
