@@ -1,15 +1,14 @@
 import "./auth-form.css";
 
-$(document).ready(function () {
-  var hash = window.location.hash.substr(1);
+document.addEventListener("DOMContentLoaded", () => {
+  const idToken = window.location.hash
+    .substr(1)
+    .split("&")
+    .map(x => x.split("="))
+    .reduce((m, x) => (x[0] === "id_token" ? x[1] : m));
 
-  var result = hash.split('&').reduce(function (result, item) {
-    var parts = item.split('=');
-    result[parts[0]] = parts[1];
-    return result;
-    }, {});
-
-  $("#jwt").val(result["id_token"])
-
+  if (idToken.length > 2) {
+    document.querySelector("#jwt").value = idToken;
+    document.querySelector(".auth-form form").submit();
+  }
 });
-

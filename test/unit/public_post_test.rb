@@ -23,8 +23,4 @@ class PublicPostTest < ActiveSupport::TestCase
     assert_equal "A Modest Proposal", subject.title
   end
 
-  def test_knows_next_oldest_valid_page
-    
-  end
-
 end
