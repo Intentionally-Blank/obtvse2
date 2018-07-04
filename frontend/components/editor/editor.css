@@ -43,4 +43,14 @@
   form a::after {
     content: " »"
   }
+
+  button {
+    display: inline-block;
+    margin-right: 1em;
+  }
+}
+
+#preview-space {
+  position: absolute;
+  background: white;
 }

@@ -6,8 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const content = document.querySelector(
     "#post_revisions_attributes_0_content"
   );
+  const previewSpace = document.querySelector("#preview-space");
 
-  function slugify(content) {
+  function slugify() {
     const request = new XMLHttpRequest();
     request.open("POST", "/api/functions/slugify", true);
     request.setRequestHeader(
@@ -20,7 +21,28 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    request.send(`content=${content}`);
+    request.send(`content=${title.value}`);
+  }
+
+  function preview() {
+    const request = new XMLHttpRequest();
+    request.open("POST", "/api/functions/markdown_preview", true);
+    request.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+    );
+    request.onload = () => {
+      if (request.status === 200) {
+        previewSpace.innerHTML = request.response;
+        previewSpace.style.position = "absolute";
+        previewSpace.style.left = `${content.offsetLeft}px`;
+        previewSpace.style.top = `${content.offsetTop}px`;
+        previewSpace.style.width = `${content.offsetWidth}px`;
+        // previewSpace.style.height = `${content.offsetHeight}px`;
+      }
+    };
+
+    request.send(`content=${content.value}`);
   }
 
   function autoAdjust() {
@@ -31,12 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
     content.style.height = 0;
 
     // set the correct height
-    // content.scrollHeight is the full height of the content, not just the visible part
     content.style.height = `${Math.max(50, content.scrollHeight + diff)}px`;
   }
 
   title.addEventListener("input", () => {
-    slugify(title.value);
+    slugify();
   });
 
   content.addEventListener("input", () => {
@@ -45,5 +66,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("resize", () => {
     autoAdjust();
+  });
+
+  document.querySelector("#preview-button").addEventListener("click", event => {
+    event.preventDefault();
+    preview();
+  });
+
+  previewSpace.addEventListener("click", () => {
+    previewSpace.innerHTML = "";
   });
 });

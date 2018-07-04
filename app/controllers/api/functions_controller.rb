@@ -1,4 +1,7 @@
 class Api::FunctionsController < ApplicationController
+  include ApplicationHelper
+
+  skip_before_action :verify_authenticity_token
 
   def markdown_preview
     render plain: markdown(params[:content]), layout: false
