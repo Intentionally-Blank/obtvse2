@@ -9,5 +9,15 @@
   <% @posts.each do |post| %>
     <%= c("teaser", post: post) %>
   <% end %>
+  <footer>
+    <nav>
+      <% if x = newer_from_here(@posts.first.date_page) %>
+        <%= link_to( button_tag("Newer"), page_url(page: x)) %>
+      <% end %>
+      <% if x = older_from_here(@posts.last.date_page) %>
+        <%= link_to( button_tag("Older"), page_url(page: x), class: "btn-right") %>
+      <% end %>
+    </nav>
+  </footer>
 <% end %>
 
