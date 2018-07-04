@@ -24,4 +24,14 @@ module ApplicationHelper
   end
 
   alias c component
+
+  def older_from_here(current)
+    pages = Pages.having_posts
+    pages[(pages.index(current) + 1)]
+  end
+
+  def newer_from_here(current)
+    pages = Pages.having_posts
+    pages[(pages.index(current) - 1)] unless pages.index(current) == 0
+  end
 end

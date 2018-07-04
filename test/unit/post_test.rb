@@ -67,6 +67,35 @@ class PostTest < ActiveSupport::TestCase
     assert_not_equal subject.urls.first.created_at, subject.urls.first.updated_at
   end
 
+  def test_updating_published_touches_post_updated_at
+    subject = posts("to-himself")
+    subject.update({
+                     urls_attributes: [{slug: "to-himself"}],
+                     revisions_attributes: [{
+                                              title:     "Meditations",
+                                              content:   "Everything we hear is an opinion, not a fact.",
+                                              published: true
+                                            }]
+                   })
+    subject.reload
+    assert_equal subject.updated_at, subject.revisions.newest.first.updated_at
+  end
+
+  def test_updating_published_touches_post_updated_at
+    subject = posts("to-himself")
+    match   = revisions("himself-v1").updated_at
+    subject.update({
+                     urls_attributes: [{slug: "to-himself"}],
+                     revisions_attributes: [{
+                                              title:     "Meditations",
+                                              content:   "Everything we hear is an opinion, not a fact.",
+                                              published: false
+                                            }]
+                   })
+    subject.reload
+    assert_equal match, subject.updated_at
+  end
+
   def test_duplicates_are_rejected
     Post.create(valid_post_attributes)
     subject = Post.create(valid_post_attributes)

@@ -1,7 +1,11 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = PublicPost.list(page: params[:page])
+    if params[:page]
+      @posts = PublicPost.list(params[:page])
+    else
+      @posts = PublicPost.index
+    end
 
     respond_to do |format|
       format.html

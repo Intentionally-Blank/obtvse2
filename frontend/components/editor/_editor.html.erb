@@ -2,8 +2,8 @@
   <%= form_for @post, url: @admin_post_path do |f|  %>
     <%= f.fields_for :revisions, @post.current_revision, include_id: false do |r| %>
       <%= r.text_field :title, placeholder: "Title..." %>
-      <%= r.text_area :content, rows: 20, placeholder: "What's on your mind..." %>
-      <%= label_tag(:published, "This is published") %>
+      <%= r.text_area :content, placeholder: "What's on your mind..." %>
+      <%= label_tag(:published, "Publish this version") %>
       <input name="post[revisions_attributes][0][published]" type="hidden" value="0" /><input type="checkbox" value="1" name="post[revisions_attributes][0][published]" id="post_revisions_attributes_0_published" />
     <% end %>
     <%= f.fields_for :urls, @post.canonical_url, include_id: false do |u| %>
@@ -12,6 +12,8 @@
         <%= link_to"Other slugs for this post", admin_post_urls_url(post_id: @post) %>
       <% end %>
     <% end %>
+    <%= button_tag("Preview", id: "preview-button") %>
     <button type="submit">Save</button>
   <% end %>
 </div>
+<div id="preview-space"></div>

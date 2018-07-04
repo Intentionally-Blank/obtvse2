@@ -27,3 +27,9 @@ himself-url-avoided:
   slug: "meditations"
   created_at: <%= 1.day.ago.to_s(:db) %>
   updated_at: <%= 1.day.ago.to_s(:db) %>
+
+moral-letters-url:
+  post: moral-letters
+  slug: "moral-letters-to-lucilius-36"
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>

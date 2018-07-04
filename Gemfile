@@ -20,12 +20,6 @@ gem "diffy"
 gem "kramdown", require: false
 gem "stringex", github: "rsl/stringex"
 
-# Pagination
-gem "kaminari"
-
-# Date Utilities
-gem "chronic"
-
 group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
