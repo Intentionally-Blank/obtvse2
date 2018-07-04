@@ -2,13 +2,12 @@ class PublicPost < Post
 
   # The 'index' page of posts
   def self.index
-    Post.
-      distinct.
-      joins(:revisions).
-      where(revisions: {published: true}).
-      newest.
-      limit(8).
-      all
+    distinct.
+    joins(:revisions).
+    where(revisions: {published: true}).
+    newest.
+    limit(8).
+    all
   end
 
   # Date based pagination year and month
@@ -17,13 +16,13 @@ class PublicPost < Post
   # @return [Array<PublicPost>]
   def self.list(page)
     year, month = page.split("-")
-    Post.
-      distinct.
-      where('extract(year from "posts".updated_at) = ? and extract(month from "posts".updated_at) = ? ', year, month).
-      joins(:revisions).
-      where(revisions: {published: true}).
-      newest.
-      all
+
+    distinct.
+    where('extract(year from "posts".updated_at) = ? and extract(month from "posts".updated_at) = ? ', year, month).
+    joins(:revisions).
+    where(revisions: {published: true}).
+    newest.
+    all
   end
 
   def self.from_slug(slug)
@@ -36,6 +35,10 @@ class PublicPost < Post
 
   def content
     revisions.published.newest.first.content
+  end
+
+  def lede
+    content.split("\n").first
   end
 
   def date_page

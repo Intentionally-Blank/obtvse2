@@ -4,14 +4,16 @@
       <%= post.title %>
     </h2>
   </header>
-  <section class="publishing">
-    Published :
-    <% post.published_at.each do |pub_datetime| %>
-      <time datetime="<%= pub_datetime %>"><%= pub_datetime.to_date.to_formatted_s(:db) %></time>
-    <% end %>
-  </section>
   <section class="content">
     <%= markdown(post.content) %>
+  </section>
+  <section class="publishing">
+    Published :
+    <ul>
+      <% post.published_at.each do |pub_datetime| %>
+        <li><time datetime="<%= pub_datetime %>"><%= pub_datetime.to_date.to_formatted_s(:db) %></time></li>
+      <% end %>
+    </ul>
   </section>
   <footer>
     <%= link_to "<i class=\"fas fa-anchor\"></i>&nbsp;#{post_url(slug: post.slug)}".html_safe, post_url(slug: post.slug), class: 'permalink' %>

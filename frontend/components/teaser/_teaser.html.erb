@@ -1,0 +1,13 @@
+<article class="teaser">
+  <h3>
+    <%= post.title %>
+  </h3>
+  <p>
+    <%= post.lede %>
+  </p>
+  <p class="publishing">
+    <% pub_datetime = post.published_at.first %>
+    <time datetime="<%= pub_datetime %>"><%= pub_datetime.to_date.to_formatted_s(:db) %></time>
+  </p>
+  <%= link_to button_tag("Read Now"), post_url(slug: post.slug), class: 'permalink' %>
+</article>

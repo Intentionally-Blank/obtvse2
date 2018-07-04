@@ -16,3 +16,6 @@ to-himself:
   created_at: <%= 1.day.ago.to_s(:db) %>
   updated_at: <%= 1.day.ago.to_s(:db) %>
 
+moral-letters:
+  created_at: <%= 1.day.ago.to_s(:db) %>
+  updated_at: <%= 1.day.ago.to_s(:db) %>

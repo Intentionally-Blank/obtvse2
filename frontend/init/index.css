@@ -31,3 +31,12 @@ button:hover {
   color: white;
   background: black;
 }
+
+.publishing {
+  font-size: 0.7em;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
