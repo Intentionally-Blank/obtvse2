@@ -8,6 +8,12 @@ Obtvse::Application.routes.draw do
     end
   end
 
+  # API
+  namespace :api do
+    post 'functions/markdown_preview' => 'functions#markdown_preview'
+    post 'functions/slugify' => 'functions#slugify'
+  end
+
   get '/posts.rss' => 'posts#index', as: 'rss'
   get '/p/:page'   => 'posts#index', as: 'page'
   get '/p/:page/posts.rss'   => 'posts#index', as: 'rss_page'
