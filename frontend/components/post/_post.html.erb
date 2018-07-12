@@ -16,6 +16,6 @@
     </ul>
   </section>
   <footer>
-    <%= link_to "<i class=\"fas fa-anchor\"></i>&nbsp;#{post_url(slug: post.slug)}".html_safe, post_url(slug: post.slug), class: 'permalink' %>
+    <%= link_to "permalink&nbsp;&raquo;&nbsp;#{post_url(slug: post.slug)}".html_safe, post_url(slug: post.slug), class: 'permalink' %>
   </footer>
 </article>

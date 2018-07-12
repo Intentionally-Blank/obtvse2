@@ -1,3 +1,10 @@
 .post {
 
+  .permalink {
+    font-size: 70%;
+  }
+
+  .publishing ul li {
+    list-style: none;
+  }
 }
