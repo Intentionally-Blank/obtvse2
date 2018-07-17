@@ -1,8 +1,16 @@
 body.posts.index header.header {
-  width: 100%;
+  width: 80%;
   text-align: center;
+  padding: 0 10%;
 }
 
 body.posts.show header.header {
-  padding-left: 2em;
+  font-size: 60%;
+  padding: 0 2%;
+
+  @media (max-width: 768px) {
+    text-align: center;
+    padding: 0 10%;
+    border-bottom: 1px dotted black;
+  }
 }

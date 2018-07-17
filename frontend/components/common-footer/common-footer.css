@@ -1,13 +1,14 @@
-body.posts.show aside.footer {
-  padding: 0 2em;
+body.posts aside.footer {
+  margin: 0 auto;
+  padding: 0 2%;
 
   h4 { float: left;}
   h6 { float: right;}
-}
 
-body.posts.index aside.footer {
-  width: 25vw;
-  margin: 0 auto;
-  text-align: center;
+  @media (max-width: 768px) {
+    text-align: center;
+    h4 { float: none;}
+    h6 { float: none;}
+  }
 }
 

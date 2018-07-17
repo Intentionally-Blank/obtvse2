@@ -2,8 +2,12 @@
 
 body {
   font-family: sans-serif;
-  font-size: 18px;
-  line-height: 30px;
+  font-size: 125%;
+  line-height: 1.67em;
+
+  @media (max-width: 768px) {
+    font-size: 100%;
+  }
 }
 
 button {
