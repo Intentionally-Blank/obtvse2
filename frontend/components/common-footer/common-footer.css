@@ -1,0 +1,13 @@
+body.posts.show aside.footer {
+  padding: 0 2em;
+
+  h4 { float: left;}
+  h6 { float: right;}
+}
+
+body.posts.index aside.footer {
+  width: 25vw;
+  margin: 0 auto;
+  text-align: center;
+}
+

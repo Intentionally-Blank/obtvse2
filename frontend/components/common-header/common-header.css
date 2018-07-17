@@ -1,0 +1,8 @@
+body.posts.index header.header {
+  width: 100%;
+  text-align: center;
+}
+
+body.posts.show header.header {
+  padding-left: 2em;
+}

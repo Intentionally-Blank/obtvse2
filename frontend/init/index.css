@@ -6,17 +6,6 @@ body {
   line-height: 30px;
 }
 
-body.posts.index h1 {
-  width: 100%;
-  text-align: center;
-}
-
-body.posts.index aside {
-  width: 25vw;
-  margin: 0 auto;
-  text-align: center;
-}
-
 button {
   margin: 1em;
   padding: 1em;
