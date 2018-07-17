@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin | <%= INFO[:title] %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_pack_tag 'admin', media: 'all' %>
+    <%= javascript_pack_tag 'admin' %>
+  </head>
+
+  <body class="<%= params[:controller].to_url %> <%= params[:action] %>">
+    <%= c("common-header") %>
+    <%= yield %>
+    <%= c("common-footer") %>
+  </body>
+</html>
