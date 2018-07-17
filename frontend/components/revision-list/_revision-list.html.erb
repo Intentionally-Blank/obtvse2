@@ -5,7 +5,7 @@
       <td><%= revision.title %></td>
       <td><%= revision.published? ? "published" : "draft" %></td>
       <td><%= revision.updated_at.to_formatted_s(:db) %></td>
-      <td><%= link_to '<i class="fas fa-eye"></i> View'.html_safe, admin_post_revision_url(post_id: revision.post.id, id: revision.id) %></td>
+      <td><%= link_to button_tag("View Difference"), admin_post_revision_url(post_id: revision.post.id, id: revision.id) %></td>
     </tr>
   <% end %>
 </table>

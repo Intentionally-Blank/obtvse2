@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= INFO[:title] %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | <%= INFO[:title] %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_pack_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_pack_tag 'admin', media: 'all' %>
+    <%= javascript_pack_tag 'admin' %>
   </head>
 
   <body class="<%= params[:controller].to_url %> <%= params[:action] %>">

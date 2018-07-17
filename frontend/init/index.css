@@ -2,19 +2,12 @@
 
 body {
   font-family: sans-serif;
-  font-size: 18px;
-  line-height: 30px;
-}
+  font-size: 125%;
+  line-height: 1.67em;
 
-body.posts.index h1 {
-  width: 100%;
-  text-align: center;
-}
-
-body.posts.index aside {
-  width: 25vw;
-  margin: 0 auto;
-  text-align: center;
+  @media (max-width: 768px) {
+    font-size: 100%;
+  }
 }
 
 button {

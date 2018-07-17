@@ -7,13 +7,13 @@
     </h3>
     <ul>
       <li>
-        <%= link_to '<i class="fas fa-edit"></i> Edit'.html_safe, edit_admin_post_url(post) %>
+        <%= link_to button_tag("Edit"), edit_admin_post_url(post) %>
       </li>
       <li>
-        <%= link_to '<i class="fas fa-anchor"></i> URL'.html_safe, post_url(slug: post.slug) %>
+        <%= link_to button_tag("Revisions"), admin_post_revisions_url(post_id: post.id) %>
       </li>
       <li>
-        <%= link_to '<i class="fas fa-th-list"></i> Revisions'.html_safe, admin_post_revisions_url(post_id: post.id) %>
+        <%= link_to button_tag("URL"), post_url(slug: post.slug) if post.published? %>
       </li>
     </ul>
   </li>
