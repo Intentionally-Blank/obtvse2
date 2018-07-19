@@ -3,7 +3,7 @@ ruby "2.5.0"
 
 gem "dotenv-rails", groups: [:development, :test]
 
-gem "rails", "5.2.0"
+gem "rails", github: "rails/rails", branch: "5-2-stable"
 gem "activerecord-session_store"
 gem "pg"
 gem "puma"
@@ -28,7 +28,7 @@ group :development, :test do
   gem "pry"
   gem "pry-doc"
   gem "rails-controller-testing"
-  gem "rubocop-rails"
+  gem "rubocop-rails_config"
   gem "simplecov", require: false
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
