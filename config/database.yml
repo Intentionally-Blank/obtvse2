@@ -14,9 +14,6 @@ test:
 
 
 production:
-    adapter:
-    encoding: utf8
-    database:
-    username:
-    password:
-    host: localhost
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: <%= ENV['DATABASE_POOL'] || 5 %>

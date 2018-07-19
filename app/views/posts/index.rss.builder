@@ -5,7 +5,7 @@ xml.rss version: "2.0" do
     xml.description INFO["tagline"]
     xml.link INFO["domain"] + root_path
 
-    for post in @posts
+    @posts.each do |post|
       xml.item do
         xml.title post.title
         if post.content
